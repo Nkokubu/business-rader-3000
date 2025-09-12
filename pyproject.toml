@@ -1,0 +1,21 @@
+[project]
+name = "business-rader-3000"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Mrs CAT",email = "130324827+Nkokubu@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "requests (>=2.32.5,<3.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "beautifulsoup4 (>=4.13.5,<5.0.0)",
+    "rich (>=14.1.0,<15.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

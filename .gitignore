@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.build/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors/IDE
+.vscode/
+.idea/
+
+# Jupyter (if you add notebooks later)
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Secrets & environment
+.env
+.env.*
+*.pem
+*.key
