@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 from services.enrichment import get_industry_info
 from services.similar import get_similar_companies
-from services.contacts import find_emails_for_company
+from services.contacts import find_emails_for_company, filter_contacts_by_title
 
 
 def main():
@@ -40,23 +40,29 @@ def main():
     website_hint = None  # change to info.get("website") if you add it to enrichment
     emails = find_emails_for_company(company, website_hint=website_hint, limit=10)
 
-    print("[bold]Emails found:[/bold]")
-    if not emails:
-        print("- (none)")
+    prioritized = filter_contacts_by_title(emails, top_n=10, min_score=1)
+
+    print("[bold]Priority contacts (best titles first):[/bold]")
+    if not prioritized:
+        print("- (none matched priority titles)")
     else:
-        for e in emails:
-            addr = (e.get("email") or "").strip()
-            name = (e.get("name") or "").strip()
-            title = (e.get("title") or "").strip()
-            src = (e.get("source") or "").strip()
+        for c in prioritized:
+            addr = (c.get("email") or "").strip()
+            name = (c.get("name") or "").strip()
+            title = (c.get("title") or "").strip()
+            src = (c.get("source") or "").strip()
+            score = c.get("score", 0)
             line = f"- {addr}"
             if name:
                 line += f" | {name}"
             if title:
                 line += f" — {title}"
+            line += f"  [score {score}]"
             if src:
                 line += f"  [{src}]"
             print(line)
+
+
 
 
 if __name__ == "__main__":

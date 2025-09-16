@@ -223,3 +223,95 @@ def find_emails_for_company(company_name: str, website_hint: Optional[str] = Non
 
     # 2) Light scrape
     return scrape_site_for_emails(domain, limit=limit)
+
+# ---------- TITLE FILTER (Day 5) ----------
+
+# Canonical role targets (expandable)
+_TARGET_PATTERNS = [
+    r"\bceo\b|\bchief executive\b",
+    r"\bfounder\b|\bco-?founder\b",
+    r"\bhead of sales\b|\bvp of sales\b|\bvice president.*sales\b|\bsales director\b|\bglobal sales\b",
+    r"\bmarketing manager\b|\bhead of marketing\b|\bcmo\b|\bchief marketing\b|\bmarketing director\b",
+    r"\bhead of procurement\b|\bprocurement manager\b|\bpurchasing manager\b|\bsourcing manager\b|\bcategory manager\b|\bhead of purchasing\b",
+]
+
+# Helpful seniority/dept boosts to catch variants
+_SENIORITY_WEIGHTS = {
+    "chief": 6, "c-level": 6, "cmo": 6, "ceo": 10,
+    "vp": 5, "vice president": 5,
+    "director": 4, "head": 6, "lead": 3,
+    "manager": 3, "global": 2, "senior": 2,
+    "founder": 8, "cofounder": 7, "co-founder": 7,
+}
+
+_DEPT_WEIGHTS = {
+    "sales": 8,
+    "marketing": 6,
+    "procurement": 8,
+    "purchasing": 8,
+    "sourcing": 7,
+    "supply chain": 6,
+    "category": 5,
+}
+
+def _score_title(title: str) -> int:
+    """
+    Score a job title for relevance. Higher is better.
+    """
+    if not title:
+        return 0
+    t = title.lower()
+
+    # Exact/regex hits for our target roles
+    score = 0
+    for pat in _TARGET_PATTERNS:
+        if re.search(pat, t):
+            score += 15  # strong hit
+
+    # Seniority / department boosts
+    for k, w in _SENIORITY_WEIGHTS.items():
+        if k in t:
+            score += w
+    for k, w in _DEPT_WEIGHTS.items():
+        if k in t:
+            score += w
+
+    # Light penalty for obviously unrelated roles
+    if any(x in t for x in ["intern", "assistant", "coordinator", "student", "trainee"]):
+        score -= 5
+
+    return score
+
+def _dedupe_by_email(contacts):
+    seen = set()
+    out = []
+    for c in contacts:
+        em = (c.get("email") or "").lower().strip()
+        if not em or em in seen:
+            continue
+        seen.add(em)
+        out.append(c)
+    return out
+
+def filter_contacts_by_title(contacts, top_n: int = 10, min_score: int = 1):
+    """
+    Input: list of {name?, title?, email, source?}
+    Output: the same shape, sorted by best title match, with a 'score' field added.
+    Only keeps items with score >= min_score.
+    """
+    scored = []
+    for c in contacts:
+        title = (c.get("title") or "").strip()
+        score = _score_title(title)
+        # extra tiny nudge if email looks like exec alias (rare but useful)
+        em = (c.get("email") or "").lower()
+        if em.startswith(("ceo@", "founder@", "sales@", "marketing@", "procurement@", "purchasing@", "sourcing@")):
+            score += 2
+        if score >= min_score:
+            c2 = dict(c)
+            c2["score"] = score
+            scored.append(c2)
+
+    scored = _dedupe_by_email(scored)
+    scored.sort(key=lambda x: x.get("score", 0), reverse=True)
+    return scored[:top_n]
