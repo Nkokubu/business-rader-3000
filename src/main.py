@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from services.enrichment import get_industry_info
 from services.similar import get_similar_companies
 from services.contacts import find_emails_for_company, filter_contacts_by_title
+from services.exporter import build_rows, export_csv, export_json
+from services.contacts import resolve_company_domain  # reuse to extract domain for URL
 
 
 def main():
@@ -62,7 +64,27 @@ def main():
                 line += f"  [{src}]"
             print(line)
 
+ # Optional website/domain hints for export URL 
+    website_hint = None  # change to info.get("website") if you start returning it in enrichment
+    domain_hint = resolve_company_domain(company, website_hint=website_hint)
 
+    # Build flat rows for export
+    rows = build_rows(
+        company_name=company,
+        industry=info.get("industry"),
+        website_hint=website_hint,
+        domain_hint=domain_hint,
+        contacts=emails,  # raw list or prioritized list — your choice
+    )
+
+    # Write CSV + JSON for take out!!!
+    base = company.lower().replace(" ", "_")
+    csv_path = export_csv(rows, basename=base)
+    json_path = export_json(rows, basename=base)
+
+    print("[bold]Saved files:[/bold]")
+    print(f"- CSV : {csv_path}")
+    print(f"- JSON: {json_path}")
 
 
 if __name__ == "__main__":
