@@ -6,6 +6,8 @@ from services.similar import get_similar_companies
 from services.contacts import find_emails_for_company, filter_contacts_by_title
 from services.exporter import build_rows, export_csv, export_json
 from services.contacts import resolve_company_domain  # reuse to extract domain for URL
+from services.news import scan_news
+
 
 
 def main():
@@ -85,6 +87,19 @@ def main():
     print("[bold]Saved files:[/bold]")
     print(f"- CSV : {csv_path}")
     print(f"- JSON: {json_path}")
+
+    # Day 6 — News & Press Releases (Funding / M&A / Expansion)
+    print("[bold]Recent news (funding / M&A / expansion):[/bold]")
+    news = scan_news(company, days=180, max_results=8)
+    if not news:
+        print("- (none)")
+    else:
+        for n in news:
+            line = f"- [{n['kind']}] {n['summary']}"
+            if n.get("date"):
+                line += f" ({n['date']})"
+            line += f"  {n['url']}"
+            print(line)
 
 
 if __name__ == "__main__":
