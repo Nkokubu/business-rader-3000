@@ -1,32 +1,36 @@
 from rich import print
 from dotenv import load_dotenv
 
+# Day 2
 from services.enrichment import get_industry_info
+# Day 3
 from services.similar import get_similar_companies
-from services.contacts import find_emails_for_company, filter_contacts_by_title
+# Day 4 & 5
+from services.contacts import find_emails_for_company, filter_contacts_by_title, resolve_company_domain
+# Day 6 (export)
 from services.exporter import build_rows, export_csv, export_json
-from services.contacts import resolve_company_domain  # reuse to extract domain for URL
+# Day 6 (news)
 from services.news import scan_news
-
+# Day 7 (keyword matching)
+from services.keyword_match import flag_business, expand_keywords, match_keywords
 
 
 def main():
     load_dotenv()
-    print("[bold green]Business Rader 3000 — Day 4[/bold green]")
+    print("[bold green]Business Rader 3000 — Day 4-7[/bold green]")
     company = input("Enter a company name: ").strip()
     if not company:
         print("[red]No company name entered. Exiting.[/red]")
         return
 
-    # Day 2 — industry lookup
+    # ---- Day 2: Industry lookup ----
     info = get_industry_info(company)
-    # Optional: normalize Yahoo's label
     if info.get("sector") == "Consumer Cyclical":
         info["sector"] = "Consumer Discretionary"
     print("[bold]Industry lookup result:[/bold]")
     print(info)
 
-    # Day 3 — similar companies
+    # ---- Day 3: Similar companies ----
     sims = get_similar_companies(company, industry_hint=info.get("industry"))
     print("[bold]Similar companies:[/bold]")
     if not sims:
@@ -39,13 +43,13 @@ def main():
                 continue
             print(f"- {name}" + (f" ({url})" if url else ""))
 
-    # Day 4 — emails (Hunter.io or shallow site scrape)
-    # If your enrichment returns a website later, pass it here; for now keep None.
-    website_hint = None  # change to info.get("website") if you add it to enrichment
+    # ---- Day 4: Emails (Hunter or shallow scrape) ----
+    # If you later return a website from enrichment, set website_hint = info.get("website")
+    website_hint = None
     emails = find_emails_for_company(company, website_hint=website_hint, limit=10)
 
+    # ---- Day 5: Prioritize by title ----
     prioritized = filter_contacts_by_title(emails, top_n=10, min_score=1)
-
     print("[bold]Priority contacts (best titles first):[/bold]")
     if not prioritized:
         print("- (none matched priority titles)")
@@ -66,29 +70,7 @@ def main():
                 line += f"  [{src}]"
             print(line)
 
- # Optional website/domain hints for export URL 
-    website_hint = None  # change to info.get("website") if you start returning it in enrichment
-    domain_hint = resolve_company_domain(company, website_hint=website_hint)
-
-    # Build flat rows for export
-    rows = build_rows(
-        company_name=company,
-        industry=info.get("industry"),
-        website_hint=website_hint,
-        domain_hint=domain_hint,
-        contacts=emails,  # raw list or prioritized list — your choice
-    )
-
-    # Write CSV + JSON for take out!!!
-    base = company.lower().replace(" ", "_")
-    csv_path = export_csv(rows, basename=base)
-    json_path = export_json(rows, basename=base)
-
-    print("[bold]Saved files:[/bold]")
-    print(f"- CSV : {csv_path}")
-    print(f"- JSON: {json_path}")
-
-    # Day 6 — News & Press Releases (Funding / M&A / Expansion)
+    # ---- Day 6: News & Press Releases ----
     print("[bold]Recent news (funding / M&A / expansion):[/bold]")
     news = scan_news(company, days=180, max_results=8)
     if not news:
@@ -101,7 +83,48 @@ def main():
             line += f"  {n['url']}"
             print(line)
 
+    # ---- Day 7: Keyword Matching (ask user, then evaluate) ----
+    raw = input("Enter interest keywords (comma-separated, e.g., ai, saas, crm): ").strip()
+    interest = [k.strip() for k in raw.split(",") if k.strip()] if raw else []
+
+    if interest:
+        # Optional: check matches in NEWS titles
+        expanded = expand_keywords(interest)
+        news_text = " ".join(n.get("title", "") for n in news)
+        news_hits = match_keywords(news_text, expanded)
+        if news_hits["matched"]:
+            print("[bold]Keyword match in NEWS:[/bold]", news_hits["matched"])
+
+        # Website/domain resolution and on-site keyword flag
+        website_hint = None  # change to info.get("website") if you add it in enrichment
+        domain = resolve_company_domain(company, website_hint=website_hint)
+        flagged = flag_business(company, url_or_domain=(domain or website_hint), include_keywords=interest)
+        print("[bold]Keyword match (website scan):[/bold]")
+        print({"flag": flagged["flag"], "score": flagged["score"], "matched": flagged["matched_keywords"]})
+        if flagged["evidence"]:
+            print("[bold]Evidence:[/bold]")
+            for ev in flagged["evidence"]:
+                print(f"- {ev['url']} — {ev['snippet']}")
+
+    # ---- Day 6: Export (CSV + JSON) ----
+    # Use domain to create a nice URL when no explicit website is available.
+    domain_hint = resolve_company_domain(company, website_hint=website_hint)
+    rows = build_rows(
+        company_name=company,
+        industry=info.get("industry"),
+        website_hint=website_hint,
+        domain_hint=domain_hint,
+        contacts=emails,  # or `prioritized` if you only want the ranked subset
+    )
+    base = company.lower().replace(" ", "_")
+    csv_path = export_csv(rows, basename=base)
+    json_path = export_json(rows, basename=base)
+    print("[bold]Saved files:[/bold]")
+    print(f"- CSV : {csv_path}")
+    print(f"- JSON: {json_path}")
+
 
 if __name__ == "__main__":
     main()
+
 
