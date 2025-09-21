@@ -13,6 +13,7 @@ from services.exporter import build_rows, export_csv, export_json
 from services.news import scan_news
 # Day 7 (keyword matching)
 from services.keyword_match import flag_business, expand_keywords, match_keywords
+from services.swot import generate_swot_from_news
 
 
 def main():
@@ -82,6 +83,25 @@ def main():
                 line += f" ({n['date']})"
             line += f"  {n['url']}"
             print(line)
+
+    # ---- Day 6+: SWOT from news ----
+    swot = generate_swot_from_news(company, news, max_items_per_bucket=5)
+    print("[bold]SWOT (from recent news):[/bold]")
+    for bucket in ("Strengths", "Weaknesses", "Opportunities", "Threats"):
+        print(f"- {bucket}:")
+        if not swot[bucket]:
+            print("  • (none)")
+        else:
+            for item in swot[bucket]:
+                print(f"  • {item}")
+
+    # Save a swot-only JSON (optional)
+    from services.exporter import export_json
+    swot_json_path = export_json(
+        [{"company_name": company, "swot": swot}],
+        basename=f"{company.lower().replace(' ','_')}_swot"
+    )
+    print(f"- SWOT JSON: {swot_json_path}")
 
     # ---- Day 7: Keyword Matching (ask user, then evaluate) ----
     raw = input("Enter interest keywords (comma-separated, e.g., ai, saas, crm): ").strip()
