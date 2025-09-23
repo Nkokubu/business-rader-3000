@@ -14,6 +14,9 @@ from services.news import scan_news
 # Day 7 (keyword matching)
 from services.keyword_match import flag_business, expand_keywords, match_keywords
 from services.swot import generate_swot_from_news
+from services.market_graph import build_and_render_market_map
+from services.similar import get_similar_companies
+
 
 
 def main():
@@ -48,6 +51,20 @@ def main():
     # If you later return a website from enrichment, set website_hint = info.get("website")
     website_hint = None
     emails = find_emails_for_company(company, website_hint=website_hint, limit=10)
+
+    # ---- Day 11: Similar Market Mapping ----
+    # One hop (seed -> peers). Increase max_depth=2 to include peers-of-peers.
+    map_paths = build_and_render_market_map(
+        seed_company=company,
+        get_similar=lambda name: get_similar_companies(name, industry_hint=info.get("industry")),
+        max_depth=1,          # try 2 for a larger map
+        max_per_company=8,    # cap per node
+        html_out=f"exports/{company.lower().replace(' ','_')}_market_map.html",
+        gexf_out=f"exports/{company.lower().replace(' ','_')}_market_map.gexf",
+    )
+    print("[bold]Market map saved:[/bold]")
+    for k, v in map_paths.items():
+        print(f"- {k.upper()}: {v}")
 
     # ---- Day 5: Prioritize by title ----
     prioritized = filter_contacts_by_title(emails, top_n=10, min_score=1)
