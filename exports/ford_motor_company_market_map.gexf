@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2025-09-23">
+    <creator>NetworkX 3.5</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="3" title="relation" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="name" type="string" />
+      <attribute id="1" title="seed" type="boolean" />
+      <attribute id="2" title="website" type="string" />
+    </attributes>
+    <nodes>
+      <node id="Ford Motor Company" label="Ford Motor Company">
+        <attvalues>
+          <attvalue for="0" value="Ford Motor Company" />
+          <attvalue for="1" value="true" />
+        </attvalues>
+      </node>
+      <node id="Opel" label="Opel">
+        <attvalues>
+          <attvalue for="0" value="Opel" />
+          <attvalue for="2" value="https://www.opel.com/" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="Pininfarina" label="Pininfarina">
+        <attvalues>
+          <attvalue for="0" value="Pininfarina" />
+          <attvalue for="2" value="https://pininfarina.it/" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="Pontiac" label="Pontiac">
+        <attvalues>
+          <attvalue for="0" value="Pontiac" />
+          <attvalue for="2" value="http://www.pontiac.com/" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="Porsche" label="Porsche">
+        <attvalues>
+          <attvalue for="0" value="Porsche" />
+          <attvalue for="2" value="https://www.porsche.com" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="Praga" label="Praga">
+        <attvalues>
+          <attvalue for="0" value="Praga" />
+          <attvalue for="2" value="http://www.pragaglobal.com/" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="Tatra" label="Tatra">
+        <attvalues>
+          <attvalue for="0" value="Tatra" />
+          <attvalue for="2" value="http://www.tatra.cz" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="Quaife" label="Quaife">
+        <attvalues>
+          <attvalue for="0" value="Quaife" />
+          <attvalue for="2" value="http://quaife.co.uk/" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+      <node id="TVR" label="TVR">
+        <attvalues>
+          <attvalue for="0" value="TVR" />
+          <attvalue for="2" value="http://www.tvr.co.uk" />
+          <attvalue for="1" value="false" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="Ford Motor Company" target="Opel" id="0">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="Pininfarina" id="1">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="Pontiac" id="2">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="Porsche" id="3">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="Praga" id="4">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="Tatra" id="5">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="Quaife" id="6">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+      <edge source="Ford Motor Company" target="TVR" id="7">
+        <attvalues>
+          <attvalue for="3" value="similar" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

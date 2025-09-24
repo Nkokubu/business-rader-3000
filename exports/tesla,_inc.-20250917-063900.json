@@ -1,0 +1,82 @@
+[
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Erin Chen",
+    "title": "Data Engineer",
+    "email": "echen@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Ashkan Paya",
+    "title": "Senior Software Engineer",
+    "email": "apaya@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Avishek Banerji",
+    "title": "Supply Chain Analyst",
+    "email": "abanerji@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Maik Matischak",
+    "title": "Head of Communications",
+    "email": "mmatischak@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Onur Baykal",
+    "title": "Account Manager",
+    "email": "obaykal@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Fabian Bailleul",
+    "title": "Key Account Manager",
+    "email": "fbailleul@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Michel Debatty",
+    "title": "Senior Account Manager",
+    "email": "mdebatty@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Brian Sliger",
+    "title": "Project Manager",
+    "email": "bsliger@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Ronee Le",
+    "title": "Estimator",
+    "email": "ler@tesla.com"
+  },
+  {
+    "company_name": "Tesla, Inc.",
+    "industry": "Auto Manufacturers",
+    "url": "https://tesla.com",
+    "contact_name": "Godfrey Sikha",
+    "title": "Principal Engineer",
+    "email": "gsikha@tesla.com"
+  }
+]

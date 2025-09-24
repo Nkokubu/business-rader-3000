@@ -1,0 +1,82 @@
+[
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Sriram Rao",
+    "title": "Director of Data Analytics",
+    "email": "sriram.rao@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Wanda Young",
+    "title": "Chief Marketing Officer",
+    "email": "wanda.young@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Laura Valdés",
+    "title": "Marketing Director",
+    "email": "laura.valdes@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Ali Khalid",
+    "title": "Transportation Manager",
+    "email": "kali@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Steven Croley",
+    "title": "Chief Policy Officer",
+    "email": "scroley@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Jim Farley",
+    "title": "Chief Executive Officer",
+    "email": "jim.farley@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Stephanie Fries",
+    "title": "Regional Director",
+    "email": "sfries8@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Mark Krugman",
+    "title": "Executive Board Member",
+    "email": "mkrugman@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Patrick Bégaud",
+    "title": "Director of Commercial Vehicles",
+    "email": "pbegaud@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Mark Truby",
+    "title": "Chief Communications Officer",
+    "email": "mtruby@ford.com"
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Sriram Rao",
+    "title": "Director of Data Analytics",
+    "email": "sriram.rao@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Wanda Young",
+    "title": "Chief Marketing Officer",
+    "email": "wanda.young@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Laura Valdés",
+    "title": "Marketing Director",
+    "email": "laura.valdes@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Christian Mendoza",
+    "title": "Senior Human Resources Business Partner",
+    "email": "christian.mendoza@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Anil Sahu",
+    "title": "Sourcing Manager",
+    "email": "asahu@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Brett Burin",
+    "title": "Director of Marketing",
+    "email": "bburin@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Mary Culler",
+    "title": "President",
+    "email": "mculler@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Jim Farley",
+    "title": "Chief Executive Officer",
+    "email": "jim.farley@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Hannah Ooms",
+    "title": "Chief of Staff",
+    "email": "hooms@ford.com"
+  },
+  {
+    "company_name": "Ford Motor Company",
+    "industry": "Auto Manufacturers",
+    "url": "https://ford.com",
+    "contact_name": "Mark Krugman",
+    "title": "Executive Board Member",
+    "email": "mkrugman@ford.com"
+  }
+]
